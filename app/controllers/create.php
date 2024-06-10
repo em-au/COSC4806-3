@@ -6,7 +6,7 @@ class Create extends Controller {
     $this->view('create/index');
   }
 
-  public function createUser() { 
+  public function create_user() { 
     /*
     1a. Will call function checkUsernameExists(username) in Model User
     1b. if userExists sets session variable usernameExists to true, then send to View Login
@@ -17,14 +17,26 @@ class Create extends Controller {
     direct to View Login (will display an error message)
     */
     $username = $_REQUEST['username'];
-    $password = $_REQUEST['password'];
-
+    $password1 = $_REQUEST['password1'];
+    $password2 = $_REQUEST['password2'];
 
     $user = $this->model('User');
-    $user->checkUsernameExists($username); 
+    $user->check_username_exists($username); 
     // echo $_SESSION['test']; // for testing, yes this does call the fxn in User
     if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == true) {
       header('location: /create');
+    }
+      
+    // Check if passwords match
+    else if ($password1 != $password2) {
+      $_SESSION['password_mismatch'] = 1;
+      header ('location: /create');
+    }
+
+    // Check if passwords meet security standard (minimum 8 characters)
+    else if (strlen($password1) < 8) {
+      $_SESSION['password_too_short'] = 1;
+      header ('location: /create');
     }
     else {
       header('location: /login');

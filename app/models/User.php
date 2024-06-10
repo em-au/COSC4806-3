@@ -47,9 +47,9 @@ class User {
     }
   }
 
-  // Check if username exists in the database
+  // Check if username exists in the Users table in database
   // think i need to bind a value like in the authenticate fxn for security reasons 
-  public function checkUsernameExists($username) {
+  public function check_username_exists($username) {
     $_SESSION['test'] = 'test';
     $db = db_connect();
     $statement = $db->prepare("SELECT username FROM users WHERE username = '$username'");
