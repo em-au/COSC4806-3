@@ -31,6 +31,7 @@
   </div>
 </div>
 <footer>
+    <a href="/login">Already have an account? Log in here.</a>
     <?php
     if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == true) {
         echo "Username already taken";
@@ -42,7 +43,7 @@
         echo "Password must be at least 8 characters";
       }
 
-    // Unset variables so error messages don't persist
+    // Unset variables so error messages don't persist (eg when refreshing page)
     unset($_SESSION['username_exists']);
     unset($_SESSION['password_mismatch']);
     unset($_SESSION['password_too_short']);

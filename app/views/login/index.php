@@ -3,7 +3,7 @@
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-12">
-                <h1>You are not logged in</h1>
+                <h1>Log in</h1>
             </div>
         </div>
     </div>
@@ -26,4 +26,18 @@
 		</form> 
 	</div>
 </div>
-    <?php require_once 'app/views/templates/footer.php' ?>
+
+<footer>
+		<a href="/create">Don't have an account? Sign up now.</a>
+		<?php
+		if (isset($_SESSION['account_created']) && $_SESSION['account_created'] == 1) {
+				echo "Account created! Please log in.";
+		}
+
+		// Unset variables so error messages don't persist (eg when refreshing page)
+		unset($_SESSION['account_created']);
+		?>
+</footer>
+<br>
+	
+<?php require_once 'app/views/templates/footer.php' ?>

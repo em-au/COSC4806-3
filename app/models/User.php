@@ -48,7 +48,7 @@ class User {
   }
 
   // Check if username exists in the Users table in database
-  // think i need to bind a value like in the authenticate fxn for security reasons 
+  // think i need to bind a value/param like in the authenticate fxn for security reasons - lect4
   public function check_username_exists($username) {
     $_SESSION['test'] = 'test';
     $db = db_connect();
@@ -64,6 +64,15 @@ class User {
       $_SESSION['username_exists'] = false;
     }
     // die;
+  }
+
+  // Add new user to the Users table
+  // think i need to bind a value like in the authenticate fxn for security reasons 
+  public function add_user($username, $password) {
+    $db = db_connect();
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $statement = $db->prepare("INSERT into users (username, password) VALUES ('$username','$hashed_password')");
+    $statement->execute();
   }
 
 }
