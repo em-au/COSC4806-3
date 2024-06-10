@@ -8,6 +8,17 @@
         </div>
     </div>
 
+<?php
+if (isset($_SESSION['account_created']) && $_SESSION['account_created'] == 1) {
+		echo "Account created! Please log in.";
+}
+
+// Unset variables so error messages don't persist (eg when refreshing page)
+unset($_SESSION['account_created']);
+?>
+
+<br>
+	<br>
 <div class="row">
     <div class="col-sm-auto">
 		<form action="/login/verify" method="post" >
@@ -29,14 +40,6 @@
 
 <footer>
 		<a href="/create">Don't have an account? Sign up now.</a>
-		<?php
-		if (isset($_SESSION['account_created']) && $_SESSION['account_created'] == 1) {
-				echo "Account created! Please log in.";
-		}
-
-		// Unset variables so error messages don't persist (eg when refreshing page)
-		unset($_SESSION['account_created']);
-		?>
 </footer>
 <br>
 	
