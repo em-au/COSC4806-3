@@ -9,16 +9,15 @@
     </div>
 
 <?php
-if (isset($_SESSION['account_created']) && $_SESSION['account_created'] == 1) {
-		echo "Account created! Please log in.";
-}
-
-// Unset variables so error messages don't persist (eg when refreshing page)
-unset($_SESSION['account_created']);
+	if (isset($_SESSION['account_created']) && $_SESSION['account_created'] == 1) {
+			echo "Account created! Please log in.";
+	}
+	
+	// Unset variables so error messages don't persist (eg when refreshing page)
+	unset($_SESSION['account_created']);
+	echo "\n\n";
 ?>
 
-<br>
-	<br>
 <div class="row">
     <div class="col-sm-auto">
 		<form action="/login/verify" method="post" >
@@ -31,8 +30,20 @@ unset($_SESSION['account_created']);
 				<label for="password">Password</label>
 				<input required type="password" class="form-control" name="password">
 			</div>
-            <br>
-		    <button type="submit" class="btn btn-primary">Login</button>
+			<?php
+				if (isset($_SESSION['username_exists'])) {
+					echo "Username does not exist";
+					unset($_SESSION['username_exists']);
+				}
+				if (isset($_SESSION['failedAuth'])) { // can't unset this bc need to keep track?
+					echo "Password is incorrect";
+				}
+
+				// Unset variables so error messages don't persist (eg when refreshing page)
+				//unset($_SESSION['username_exists']); // NOT WORKING, is there when u create an acct and get redirected
+			?>
+			<br>
+			<button type="submit" class="btn btn-primary">Login</button>
 		</fieldset>
 		</form> 
 	</div>

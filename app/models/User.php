@@ -56,12 +56,8 @@ class User {
     $statement->execute(); 
     $row = $statement->fetch(PDO::FETCH_ASSOC);
 
-    
     if (isset($row) && !empty($row)) {
-      $_SESSION['username_exists'] = true;
-    }
-    else {
-      $_SESSION['username_exists'] = false;
+      $_SESSION['username_exists'] = 1;
     }
     // die;
   }

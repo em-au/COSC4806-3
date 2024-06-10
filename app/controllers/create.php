@@ -15,7 +15,7 @@ class Create extends Controller {
 
     // Check if username exists
     $user->check_username_exists($username); 
-    if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == true) {
+    if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == 1) {
       header('location: /create');
     }
       

@@ -25,7 +25,7 @@
                 <input required type="password" class="form-control" name="password2">
               </div>
             <?php
-            if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == true) {
+            if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == 1) {
                 echo "Username already taken";
             }
             else if (isset($_SESSION['password_mismatch']) && $_SESSION['password_mismatch'] == 1) {
@@ -48,22 +48,6 @@
 </div>
 <footer>
     <a href="/login">Already have an account? Log in here.</a>
-    <?php
-    if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == true) {
-        echo "Username already taken";
-    }
-    else if (isset($_SESSION['password_mismatch']) && $_SESSION['password_mismatch'] == 1) {
-        echo "Passwords do not match";
-      }
-      else if (isset($_SESSION['password_too_short']) && $_SESSION['password_too_short'] == 1) {
-        echo "Password must be at least 8 characters";
-      }
-
-    // Unset variables so error messages don't persist (eg when refreshing page)
-    unset($_SESSION['username_exists']);
-    unset($_SESSION['password_mismatch']);
-    unset($_SESSION['password_too_short']);
-    ?>
 </footer>
 <br>
     
