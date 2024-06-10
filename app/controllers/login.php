@@ -6,7 +6,7 @@ class Login extends Controller {
 	    $this->view('login/index');
     }
     
-    public function verify(){
+    public function verify() {
 			$username = $_REQUEST['username'];
 			$password = $_REQUEST['password'];
 
@@ -16,8 +16,21 @@ class Login extends Controller {
 				header('location: /login');
 				die;
 			}
-			
 			$user->authenticate($username, $password); 
-    }
+
+
+
+			// private $success;
+			// $log = $this->model('Log');
+			// if ($_SESSION[auth] == 1) {
+			// 	$success = true; // need to declare?
+			// }
+			// else {
+			// 	$success = false;
+			// }
+			// date_default_timezone_set('America/Toronto');
+			// $date = date('Y-m-d H:i:s');
+			// $user->log_attempt($username, $success, $date);
+   //  }
 
 }

@@ -32,10 +32,10 @@ class User {
     
     if (password_verify($password, $rows['password'])) {
       $_SESSION['auth'] = 1;
-      $_SESSION['username'] = ucwords($username);
+      $_SESSION['username'] = ucwords($username); // use this to display username in Home
       unset($_SESSION['failedAuth']);
       header('Location: /home'); // should this be done by the controller?
-      die;
+      //die;
     } else {
       if(isset($_SESSION['failedAuth'])) {
         $_SESSION['failedAuth'] ++; //increment
@@ -43,14 +43,13 @@ class User {
         $_SESSION['failedAuth'] = 1;
       }
       header('Location: /login'); // should this be done by the controller?
-      die;
+      //die;
     }
   }
 
   // Check if username exists in the Users table in database
   // think i need to bind a value/param like in the authenticate fxn for security reasons - lect4
   public function check_username_exists($username) {
-    $_SESSION['test'] = 'test';
     $db = db_connect();
     $statement = $db->prepare("SELECT username FROM users WHERE username = '$username'");
     $statement->execute(); 
