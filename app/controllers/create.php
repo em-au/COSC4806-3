@@ -23,8 +23,11 @@ class Create extends Controller {
     $user = $this->model('User');
     $user->checkUsernameExists($username); 
     // echo $_SESSION['test']; // for testing, yes this does call the fxn in User
-    if (isset($_SESSION['usernameExists']) && $_SESSION['usernameExists'] == true) {
-      echo "Username taken";
+    if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == true) {
+      header('location: /create');
+    }
+    else {
+      header('location: /login');
     }
   }
 }

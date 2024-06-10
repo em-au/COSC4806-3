@@ -58,10 +58,10 @@ class User {
 
     
     if (isset($row) && !empty($row)) {
-      $_SESSION['usernameExists'] = true;
+      $_SESSION['username_exists'] = true;
     }
     else {
-      $_SESSION['usernameExists'] = false;
+      $_SESSION['username_exists'] = false;
     }
     // die;
   }
