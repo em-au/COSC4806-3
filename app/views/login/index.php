@@ -9,9 +9,9 @@
     </div>
 
 <?php
-	if (isset($_SESSION['account_created']) && $_SESSION['account_created'] == 1) {
-			echo "Account created! Please log in.";
-	}
+	if (isset($_SESSION['account_created']) && $_SESSION['account_created'] == 1) { ?>
+			<span style="color: green">Account created! Please login.</span>
+	<?php }
 	
 	// Unset variables so error messages don't persist (eg when refreshing page)
 	unset($_SESSION['account_created']);
