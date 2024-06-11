@@ -30,7 +30,7 @@
 				<label for="password">Password</label>
 				<input required type="password" class="form-control" name="password">
 			</div>
-			<?php // ERROR: username taken error message is persist
+			<?php // ERROR: username taken error message is persist?
 			if (isset($_SESSION['username_exists']) && ($_SESSION['username_exists'] == 0)) { ?>
 					<span style="color: red">Username does not exist</span>
 			 <?php }
@@ -51,6 +51,7 @@
 	</div>
 </div>
 <a href="/create">Don't have an account? Sign up now.</a>
+
 <?php // NEED TO CHANGE TIME BACK TO 60 SEC
 	if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_start'] + 5)) { ?>
 		<br>
@@ -63,5 +64,5 @@
 		unset($_SESSION['locked']);
 	}
 ?>
-	
+<br><br>
 <?php require_once 'app/views/templates/footer.php' ?>
