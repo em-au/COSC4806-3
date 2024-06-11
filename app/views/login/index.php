@@ -50,7 +50,7 @@
 		</form> 
 	</div>
 </div>
-	<a href="/create">Don't have an account? Sign up now.</a>
+<a href="/create">Don't have an account? Sign up now.</a>
 <?php // NEED TO CHANGE TIME BACK TO 60 SEC
 	if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_start'] + 5)) { ?>
 		<br>
@@ -63,10 +63,5 @@
 		unset($_SESSION['locked']);
 	}
 ?>
-			
-<footer>
-
-</footer>
-<br>
 	
 <?php require_once 'app/views/templates/footer.php' ?>
