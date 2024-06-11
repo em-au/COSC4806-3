@@ -52,7 +52,7 @@
 
 <?php
 	if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_start'] + 5)) { 
-		echo "You have been locked out. Try again in 60 seconds.";
+		echo "You have been locked out. Please refresh the page and try again in 60 seconds.";
 	}
 	else {
 		unset($_SESSION['locked']);
