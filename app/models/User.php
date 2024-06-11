@@ -32,7 +32,7 @@ class User {
     
     if (password_verify($password, $rows['password'])) {
       $_SESSION['auth'] = 1;
-      $_SESSION['username'] = ucwords($username); // use this to display username in Home
+      $_SESSION['username'] = ucwords($username);
       unset($_SESSION['failedAuth']);
       header('Location: /home'); // should this be done by the controller?
       //die;

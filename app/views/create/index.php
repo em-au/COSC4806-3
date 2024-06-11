@@ -24,24 +24,35 @@
                 <label for="password">Confirm Password</label>
                 <input required type="password" class="form-control" name="password2">
               </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Sign up</button>
+            <br>
             <?php
-            if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == 1) {
-                echo "Username already taken";
-            }
-            else if (isset($_SESSION['password_mismatch']) && $_SESSION['password_mismatch'] == 1) {
-                echo "Passwords do not match";
-              }
-              else if (isset($_SESSION['password_too_short']) && $_SESSION['password_too_short'] == 1) {
-                echo "Password must be at least 8 characters";
-              }
+            if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == true) { ?>
+                <br>
+                <div class="alert alert-danger" role="alert">
+                  Username already taken
+                </div>
+            <?php }
+            else if (isset($_SESSION['password_mismatch']) && $_SESSION['password_mismatch'] == 1) { ?>
+                <br>
+                <div class="alert alert-danger" role="alert">
+                    Passwords do not match
+                </div>
+              <?php }
+              else if (isset($_SESSION['password_too_short']) && $_SESSION['password_too_short'] == 1) { ?>
+                <br>
+                <div class="alert alert-danger" role="alert">
+                    Password must be at least 8 characters
+                </div>
+              <?php }
 
             // Unset variables so error messages don't persist (eg when refreshing page)
             unset($_SESSION['username_exists']);
             unset($_SESSION['password_mismatch']);
             unset($_SESSION['password_too_short']);
             ?>
-            <br>
-            <button type="submit" class="btn btn-primary">Sign up</button>
+            
         </fieldset>
         </form> 
   </div>
@@ -52,3 +63,4 @@
 <br>
     
 <?php require_once 'app/views/templates/footer.php' ?>
+    

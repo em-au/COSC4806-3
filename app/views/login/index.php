@@ -30,37 +30,42 @@
 				<label for="password">Password</label>
 				<input required type="password" class="form-control" name="password">
 			</div>
-			<?php
-				if (isset($_SESSION['username_exists']) && ($_SESSION['username_exists'] == 0)) {
-					echo "Username does not exist";
-					unset($_SESSION['username_exists']);
-				}
-				if (isset($_SESSION['password_incorrect'])) {
-					echo "Password is incorrect";
-				 	unset($_SESSION['password_incorrect']);
-				}
-
-			?>
-			<br>
+			<?php // ERROR: username taken error message is persist
+			if (isset($_SESSION['username_exists']) && ($_SESSION['username_exists'] == 0)) { ?>
+					<span style="color: red">Username does not exist</span>
+			 <?php }
+			 if (isset($_SESSION['password_incorrect'])) { ?>
+					<span style="color: red">Password is incorrect</span>
+			<?php } ?>
+			<br>	
 			<button type="submit" class="btn btn-primary" 
 				<?php // NEED TO CHANGE TIME BACK TO 60 SEC
 				if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_start'] + 5)) { ?> disabled <?php } ?>>Login</button>
+			<br>
+			<?php 
+					unset($_SESSION['username_exists']);
+				 	unset($_SESSION['password_incorrect']);
+			?>
 		</fieldset>
 		</form> 
 	</div>
 </div>
-
-<?php
-	if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_start'] + 5)) { 
-		echo "You have been locked out. Please refresh the page and try again in 60 seconds.";
-	}
+	<a href="/create">Don't have an account? Sign up now.</a>
+<?php // NEED TO CHANGE TIME BACK TO 60 SEC
+	if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_start'] + 5)) { ?>
+		<br>
+		<br>
+		<div class="alert alert-danger" role="alert">
+				You have been locked out. Please refresh the page and try again in 60 seconds.
+		</div>
+	<?php }
 	else {
 		unset($_SESSION['locked']);
 	}
 ?>
 			
 <footer>
-		<a href="/create">Don't have an account? Sign up now.</a>
+
 </footer>
 <br>
 	
