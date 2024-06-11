@@ -18,8 +18,6 @@ class Login extends Controller {
 			}
 			$user->authenticate($username, $password); 
 			$this->lock(); // Check if user should be locked out
-			//echo $_SESSION['failedAuth'];
-			//echo " " . $_SESSION['locked'];
 			
 			// Log attempt 
 			$log = $this->model('Log');
@@ -36,26 +34,10 @@ class Login extends Controller {
 
     }
 
-
 		public function lock() {
 			if ($_SESSION['failedAuth'] >= 3) {
 				$_SESSION['locked'] = 1;
 				$_SESSION['lock_start'] = time(); // Current time
-				echo "this is from controller";
-				echo "lock_start: " . $_SESSION['lock_start'];
-				echo "\nCurrent time: " . time();
-				//$_SESSION['end'] = time() + 5; // CHANGE TO 60 SECONDS
-				//$this->unlock(); // Check if it has been 60 seconds
-
-				// echo "\n\nsession variable locked: " . $_SESSION['locked']; //1 
-				// unset($_SESSION['locked']);
-				// echo "\n\nsession variable locked: " . $_SESSION['locked']; // none
-			}
-		}
-
-		public function unlock() {
-			if (time() > $_SESSION['lock_start'] + 5) {
-				unset($_SESSION['locked']);
 			}
 		}
 

@@ -35,31 +35,30 @@
 					echo "Username does not exist";
 					unset($_SESSION['username_exists']);
 				}
-				if (isset($_SESSION['failedAuth'])) { // can't unset this bc need to keep track?
+				if (isset($_SESSION['password_incorrect'])) {
 					echo "Password is incorrect";
+				 	unset($_SESSION['password_incorrect']);
 				}
 
 			?>
 			<br>
 			<button type="submit" class="btn btn-primary" 
-				<?php 
-				$test = new Login();
-				$test->unlock();
-				if (isset($_SESSION['locked'])) { ?> disabled <?php } ?>>Login</button>
+				<?php // NEED TO CHANGE TIME BACK TO 60 SEC
+				if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_start'] + 5)) { ?> disabled <?php } ?>>Login</button>
 		</fieldset>
 		</form> 
 	</div>
 </div>
 
 <?php
-	echo $_SESSION['locked'];
-	echo " " . $_SESSION['failedAuth'];
-	echo "why" . $_SESSION['lock_start'];
-	echo "\n time" . time();
+	if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_start'] + 5)) { 
+		echo "You have been locked out. Try again in 60 seconds.";
+	}
+	else {
+		unset($_SESSION['locked']);
+	}
 ?>
-					
-
-					
+			
 <footer>
 		<a href="/create">Don't have an account? Sign up now.</a>
 </footer>

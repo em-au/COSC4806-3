@@ -37,14 +37,13 @@ class User {
       header('Location: /home'); // should this be done by the controller?
       //die;
     } else {
+      $_SESSION['password_incorrect'] = 1;
       if(isset($_SESSION['failedAuth'])) {
         $_SESSION['failedAuth'] ++; //increment
       } else {
         $_SESSION['failedAuth'] = 1;
       }
       header('Location: /login'); // should this be done by the controller?
-      //echo $_SESSION['failedAuth'];
-      //echo $_SESSION['locked'];
       //die;
     }
   }
