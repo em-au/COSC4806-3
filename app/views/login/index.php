@@ -31,7 +31,7 @@
 				<input required type="password" class="form-control" name="password">
 			</div>
 			<?php
-				if (isset($_SESSION['username_exists'])) {
+				if (isset($_SESSION['username_exists']) && ($_SESSION['username_exists'] == 0)) {
 					echo "Username does not exist";
 					unset($_SESSION['username_exists']);
 				}
@@ -39,16 +39,27 @@
 					echo "Password is incorrect";
 				}
 
-				// Unset variables so error messages don't persist (eg when refreshing page)
-				//unset($_SESSION['username_exists']); // NOT WORKING, is there when u create an acct and get redirected
 			?>
 			<br>
-			<button type="submit" class="btn btn-primary">Login</button>
+			<button type="submit" class="btn btn-primary" 
+				<?php 
+				$test = new Login();
+				$test->unlock();
+				if (isset($_SESSION['locked'])) { ?> disabled <?php } ?>>Login</button>
 		</fieldset>
 		</form> 
 	</div>
 </div>
 
+<?php
+	echo $_SESSION['locked'];
+	echo " " . $_SESSION['failedAuth'];
+	echo "why" . $_SESSION['lock_start'];
+	echo "\n time" . time();
+?>
+					
+
+					
 <footer>
 		<a href="/create">Don't have an account? Sign up now.</a>
 </footer>

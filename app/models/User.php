@@ -43,6 +43,8 @@ class User {
         $_SESSION['failedAuth'] = 1;
       }
       header('Location: /login'); // should this be done by the controller?
+      //echo $_SESSION['failedAuth'];
+      //echo $_SESSION['locked'];
       //die;
     }
   }
@@ -54,9 +56,11 @@ class User {
     $statement = $db->prepare("SELECT username FROM users WHERE username = '$username'");
     $statement->execute(); 
     $row = $statement->fetch(PDO::FETCH_ASSOC);
-
     if (isset($row) && !empty($row)) {
       $_SESSION['username_exists'] = 1;
+    }
+    else {
+      $_SESSION['username_exists'] = 0;
     }
     // die;
   }
