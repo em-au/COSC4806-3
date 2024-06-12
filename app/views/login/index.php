@@ -3,17 +3,17 @@
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-12">
-                <h1>Log in</h1>
+                <h1>Login</h1>
             </div>
         </div>
     </div>
 
 <?php
-	if (isset($_SESSION['account_created']) && $_SESSION['account_created'] == 1) { ?>
+	if ($_SESSION['account_created'] == 1) { ?>
 			<span style="color: green">Account created! Please login.</span>
 	<?php }
 	
-	// Unset variables so error messages don't persist (eg when refreshing page)
+	// Unset variable so message doesn't stick around (eg when refreshing page)
 	unset($_SESSION['account_created']);
 	echo "\n\n";
 ?>
@@ -30,22 +30,23 @@
 				<label for="password">Password</label>
 				<input required type="password" class="form-control" name="password">
 			</div>
-			<?php // ERROR: username taken error message is persist?
+			
+			<?php // Display error messages
 			if (isset($_SESSION['username_exists']) && ($_SESSION['username_exists'] == 0)) { ?>
 					<span style="color: red">Username does not exist</span>
 			 <?php }
 			 if (isset($_SESSION['password_incorrect'])) { ?>
 					<span style="color: red">Password is incorrect</span>
-			<?php } ?>
+			<?php } 
+				 unset($_SESSION['username_exists']);
+				 unset($_SESSION['password_incorrect']); 
+			?>
 			<br>	
+				 
 			<button type="submit" class="btn btn-primary" 
 				<?php 
 				if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_end'])) { ?> disabled <?php } ?>>Login</button>
 			<br>
-			<?php 
-					unset($_SESSION['username_exists']);
-				 	unset($_SESSION['password_incorrect']);
-			?>
 		</fieldset>
 		</form> 
 	</div>
@@ -57,7 +58,7 @@
 		<br>
 		<br>
 		<div class="alert alert-danger" role="alert">
-				You have been locked out. Please refresh the page and try again in 60 seconds.
+				You have been locked out for 60 seconds. Please refresh the page and try again later.
 		</div>
 	<?php }
 	else {

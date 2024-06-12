@@ -4,7 +4,7 @@ class User {
 
   public $username;
   public $password;
-  public $auth = false;
+  public $is_authenticated = false;
 
   public function __construct() {
       
@@ -21,7 +21,7 @@ class User {
   public function authenticate($username, $password) {
       /*
        * if username and password good then
-       * $this->auth = true;
+       * $this->is_authenticated = true;
        */
     $_SESSION['username'] = $username;
     $username = strtolower($username);
@@ -32,21 +32,7 @@ class User {
         $rows = $statement->fetch(PDO::FETCH_ASSOC);
     
     if (password_verify($password, $rows['password'])) {
-      $_SESSION['auth'] = 1;
-      //$_SESSION['username'] = ucwords($username);
-      
-      unset($_SESSION['failedAuth']);
-      header('Location: /home'); // should this be done by the controller?
-      //die;
-    } else {
-      $_SESSION['password_incorrect'] = 1;
-      if(isset($_SESSION['failedAuth'])) {
-        $_SESSION['failedAuth'] ++; //increment
-      } else {
-        $_SESSION['failedAuth'] = 1;
-      }
-      header('Location: /login'); // should this be done by the controller?
-      //die;
+      $this->is_authenticated = true;
     }
   }
 

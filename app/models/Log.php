@@ -10,6 +10,7 @@ class Log {
 
   // }
 
+  // Adds the login attempt to Logs table in database
   public function log_attempt($username, $success, $time) {
     $db = db_connect();
     $statement = $db->prepare("INSERT INTO logs (username, success, time) VALUES (:username, :success, :time)");
