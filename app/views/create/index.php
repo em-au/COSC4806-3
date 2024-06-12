@@ -34,12 +34,11 @@
               else if ($_SESSION['password_too_short'] == 1) { ?>
                 <span style="color: red">Password must be at least 8 characters</span>
               <?php }
-
-            // Unset variables so error messages don't persist
-            unset($_SESSION['username_exists']);
-            unset($_SESSION['password_mismatch']);
-            unset($_SESSION['password_too_short']);
-            ?>
+                // Unset variables so error messages don't persist
+                unset($_SESSION['username_exists']);
+                unset($_SESSION['password_mismatch']);
+                unset($_SESSION['password_too_short']);
+                ?>
             <br>
             <button type="submit" class="btn btn-primary">Sign up</button>
         </fieldset>
