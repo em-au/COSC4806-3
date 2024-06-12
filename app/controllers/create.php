@@ -15,7 +15,7 @@ class Create extends Controller {
 
     // Check if username exists
     $user->check_username_exists($username); 
-    if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == 1) {
+    if ($_SESSION['username_exists'] == 1) {
       header('location: /create');
     }
       
@@ -32,11 +32,10 @@ class Create extends Controller {
     }
     else {
       // Passed all requirements
-      // Create user in database --> should be done in Model User (so call fxn add_user)
-      // Session variable account_created --> display as message on login page
+      // Call model to add user to Users table in database
       $user->add_user($username, $password1);
-      //echo "test - called add user fxn" . $username . $password1; //works
       $_SESSION['account_created'] = 1;
+      unset($_SESSION['username_exists']);
       header('location: /login');
     }
   }

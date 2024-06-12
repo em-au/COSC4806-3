@@ -24,14 +24,14 @@
                 <label for="password">Confirm Password</label>
                 <input required type="password" class="form-control" name="password2">
               </div>
-            <?php
-            if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == true) { ?>
+            <?php // Display error messages
+            if (isset($_SESSION['username_exists']) && $_SESSION['username_exists'] == 1) { ?>
               <span style="color: red">Username already taken</span>
             <?php }
-            else if (isset($_SESSION['password_mismatch']) && $_SESSION['password_mismatch'] == 1) { ?>
+            else if ($_SESSION['password_mismatch'] == 1) { ?>
                 <span style="color: red">Passwords do not match</span>
               <?php }
-              else if (isset($_SESSION['password_too_short']) && $_SESSION['password_too_short'] == 1) { ?>
+              else if ($_SESSION['password_too_short'] == 1) { ?>
                 <span style="color: red">Password must be at least 8 characters</span>
               <?php }
 

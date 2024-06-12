@@ -43,7 +43,7 @@ class User {
     $statement->bindValue(':username', $username);
     $statement->execute(); 
     $row = $statement->fetch(PDO::FETCH_ASSOC);
-    if (isset($row) && !empty($row)) {
+    if (!empty($row)) { 
       $_SESSION['username_exists'] = 1;
     }
     else {
@@ -59,7 +59,6 @@ class User {
     $statement->bindValue(':username', $username);
     $statement->bindValue(':password', $hashed_password);
     $statement->execute();
-    unset($_SESSION['username_exists']);
   }
 
 }
