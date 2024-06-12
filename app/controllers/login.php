@@ -37,7 +37,7 @@ class Login extends Controller {
 		public function lock() {
 			if ($_SESSION['failedAuth'] >= 3) {
 				$_SESSION['locked'] = 1;
-				$_SESSION['lock_start'] = time(); // Current time
+				$_SESSION['lock_end'] = time() + 5; // CHANGE BACK TO 60 SEC
 			}
 		}
 
