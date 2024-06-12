@@ -23,6 +23,7 @@ class User {
        * if username and password good then
        * $this->auth = true;
        */
+    $_SESSION['username'] = $username;
     $username = strtolower($username);
     $db = db_connect();
         $statement = $db->prepare("select * from users WHERE username = :name;");
@@ -32,7 +33,8 @@ class User {
     
     if (password_verify($password, $rows['password'])) {
       $_SESSION['auth'] = 1;
-      $_SESSION['username'] = ucwords($username);
+      //$_SESSION['username'] = ucwords($username);
+      
       unset($_SESSION['failedAuth']);
       header('Location: /home'); // should this be done by the controller?
       //die;

@@ -39,7 +39,7 @@
 			<?php } ?>
 			<br>	
 			<button type="submit" class="btn btn-primary" 
-				<?php // NEED TO CHANGE TIME BACK TO 60 SEC
+				<?php 
 				if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_end'])) { ?> disabled <?php } ?>>Login</button>
 			<br>
 			<?php 
@@ -52,7 +52,7 @@
 </div>
 <a href="/create">Don't have an account? Sign up now.</a>
 
-<?php // NEED TO CHANGE TIME BACK TO 60 SEC
+<?php
 	if (isset($_SESSION['locked']) && !(time() > $_SESSION['lock_end'])) { ?>
 		<br>
 		<br>

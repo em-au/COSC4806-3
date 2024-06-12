@@ -17,9 +17,8 @@ class Login extends Controller {
 				die;
 			}
 			$user->authenticate($username, $password); 
-			$this->lock(); // Check if user should be locked out
 			
-			// Log attempt 
+			// Log attempt in Logs table in database
 			$log = $this->model('Log');
 
 			if ($_SESSION['auth'] == 1) {
@@ -32,12 +31,16 @@ class Login extends Controller {
 			$date = date('Y-m-d H:i:s');
 			$log->log_attempt($username, $success, $date);
 
+			// Check if user should be locked out
+			$this->lock(); 
     }
 
 		public function lock() {
 			if ($_SESSION['failedAuth'] >= 3) {
 				$_SESSION['locked'] = 1;
-				$_SESSION['lock_end'] = time() + 5; // CHANGE BACK TO 60 SEC
+				$log = $this->model('Log');
+				$_SESSION['lock_start'] = $log->lock_time($_SESSION['username']);
+				$_SESSION['lock_end'] = strtotime($_SESSION['lock_start']) + 5; // CHANGE BACK TO 60 SEC
 			}
 		}
 
