@@ -68,7 +68,7 @@ class Login extends Controller {
 				 // Call model to get time of last failed attempt
 				$log->lock_time($_SESSION['username']);
 				$_SESSION['lock_start'] = $log->time;
-				$_SESSION['lock_end'] = strtotime($_SESSION['lock_start']) + 5; // CHANGE BACK TO 60 SEC
+				$_SESSION['lock_end'] = strtotime($_SESSION['lock_start']) + 60; 
 			}
 		}
 
