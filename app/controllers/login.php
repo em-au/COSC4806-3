@@ -57,13 +57,18 @@ class Login extends Controller {
 			$log->log_attempt($username, $success, $date);
 		}
 
-		// Check if user should be locked out
+		// Lock user out
 		public function lock() {
-			if ($_SESSION['failedAuth'] >= 3) {
+			$log = $this->model('Log');
+			$log->count_fails($_SESSION['username']);
+			/* Lock user out if they have failed >= 3 times in this session (session variable)
+			or >= 3 times for a specific username (database) */
+			if ($log->current_fails >= 3 || $_SESSION['failedAuth'] >= 3) {
 				$_SESSION['locked'] = 1;
-				$log = $this->model('Log'); // Call model to get time of last failed attempt
-				$_SESSION['lock_start'] = $log->lock_time($_SESSION['username']);
-				$_SESSION['lock_end'] = strtotime($_SESSION['lock_start']) + 60; 
+				 // Call model to get time of last failed attempt
+				$log->lock_time($_SESSION['username']);
+				$_SESSION['lock_start'] = $log->time;
+				$_SESSION['lock_end'] = strtotime($_SESSION['lock_start']) + 5; // CHANGE BACK TO 60 SEC
 			}
 		}
 
